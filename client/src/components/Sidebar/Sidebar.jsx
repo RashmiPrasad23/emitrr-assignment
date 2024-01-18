@@ -1,9 +1,8 @@
-
-import React from 'react'
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "../../assets/svg/react.svg"
+import logo from "../../assets/svg/react.svg";
 
 const SideBar = styled.div`
   overflow: auto;
@@ -30,7 +29,7 @@ const SidebarWrapper = styled.div`
   width: 260px;
   z-index: 4;
   padding-bottom: 100px;
-  background-color:#ffd058;
+  background-color: #ffd058;
 `;
 const Logo = styled.img`
   max-height: 50px;
@@ -62,70 +61,76 @@ const NavLinkText = styled.p`
   margin: auto 10px;
 `;
 
-
 function Sidebar() {
   return (
     <SideBar>
-        <SidebarWrapper>
-         <div className="logo ">
-            <a href="/">
-           <img src={logo} alt="logo" />
-           
-           </a>
-         </div>
-            <ul className='nav d-block mt-5'>
-                <li className=" mb-4" >
-                   <NavLink className="nav-link"
-                      to="">
-                        <FontAwesomeIcon
-                        icon="fa-solid fa-gauge "
-                        fixedWidth
-                        pull="left"
-                        className="my-auto fs-4"
-                        />
-                      <NavLinkText>DASHBOARD</NavLinkText>
-                   </NavLink>
-                </li>
-                <li className="nav-item mb-4">
-                    <NavLink className="nav-link"
-                    to="">
-                    <FontAwesomeIcon
-                    icon="fa-solid fa-pencil"
-                    fixedWidth
-                    pull="left"
-                    className="my-auto fs-4"
-                    />
-                    <NavLinkText>EDIT PROFILE</NavLinkText>
-                    </NavLink >
-                </li>
-                <li className="nav-item mb-4">
-                   <NavLink className="nav-link"
-                   to="">
-                     <FontAwesomeIcon
-                    icon="fa-solid fa-pencil"
-                    fixedWidth
-                    pull="left"
-                    className="my-auto fs-4"
-                    />
-                    <NavLinkText>VIEW RESULTS</NavLinkText>
-                   </NavLink>
-                </li>
-                <li className="nav-item mb-4">
-                   <NavLink className="nav-link"
-                   to="">
-                     <FontAwesomeIcon
-                    icon="fa-solid fa-pencil"
-                    fixedWidth
-                    pull="left"
-                    className="my-auto fs-4"
-                    />
-                    <NavLinkText>SUPER ADMIN</NavLinkText>
-                   </NavLink>
-                </li>
-            </ul>
-        </SidebarWrapper>
+      <SidebarWrapper>
+        <div className="logo ">
+          <a href="/">
+            <img src={logo} alt="logo" />
+          </a>
+        </div>
+        <ul className="nav d-block mt-5">
+          <li className="nav-item mb-4">
+            <NavLink className="nav-link" to="/profile">
+              <FontAwesomeIcon
+                icon="fa-solid fa-pencil"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4"
+              />
+              <NavLinkText>PROFILE</NavLinkText>
+            </NavLink>
+          </li>
+          <li className="nav-item mb-4">
+            <NavLink className="nav-link" to="/start">
+              <FontAwesomeIcon
+                icon="fa-solid fa-pencil"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4"
+              />
+              <NavLinkText>START TEST</NavLinkText>
+            </NavLink>
+          </li>
+          <li className="nav-item mb-4">
+            <NavLink className="nav-link" to="">
+              <FontAwesomeIcon
+                icon="fa-solid fa-pencil"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4"
+              />
+              <NavLinkText>VIEW RESULTS</NavLinkText>
+            </NavLink>
+          </li>
+          <li className="nav-item mb-4">
+            <NavLink className="nav-link" to="">
+              <FontAwesomeIcon
+                icon="fa-solid fa-pencil"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4"
+              />
+              <NavLinkText>SUPER ADMIN</NavLinkText>
+            </NavLink>
+          </li>
+          {/* settings page */}
+          <li className="nav-item mb-4">
+            <NavLink className="nav-link" to="/settings">
+              <FontAwesomeIcon
+                icon="fa-solid fa-pencil"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4"
+              />
+              <NavLinkText>SETTINGS</NavLinkText>
+            </NavLink>
+          </li>
+        </ul>
+      </SidebarWrapper>
     </SideBar>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

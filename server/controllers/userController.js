@@ -167,8 +167,8 @@ const logoutUser=asyncHandler(async(req,res)=>{
 
 const refreshAccessToken=asyncHandler(async(req,res)=>{
    const incomingRefreshToken= req.cookies.refreshToken||req.body.refreshToken
-
-   if(incomingRefreshToken){
+ 
+   if(!incomingRefreshToken){
     throw new ApiError(401,"unauthorised request")
    }
 
@@ -177,13 +177,13 @@ const refreshAccessToken=asyncHandler(async(req,res)=>{
       incomingRefreshToken,
       process.env.REFRESH_TOKEN_SECRET
      )
-     const user=await User.findById(decodedToken?._id)
-  
-     if(incomingRefreshToken){
+     const user=await User.findById(decodedToken?._id).select("-password")
+ 
+     if(!incomingRefreshToken){
       throw new ApiError(401,"invalid refresh token")
      }
   
-     if(incomingRefreshToken!=user?.refreshToken){
+     if(incomingRefreshToken !== user?.refreshToken){
       throw new ApiError(401,"refresh token is expiredor use")
      }
   
@@ -192,24 +192,47 @@ const refreshAccessToken=asyncHandler(async(req,res)=>{
           secure:true
       }
   
-      const {accessToken,newRefreshToken}=await generateAccessAndRefreshTokens(user._id)
-  
+      const {accessToken,refreshToken}=await generateAccessAndRefreshTokens(user._id)
+    
       return res
       .status(200)
       .cookie("accessToken",accessToken,options)
-      .cookie("refreshToken",newRefreshToken,options)
+      .cookie("refreshToken",refreshToken,options)
       .json(
           new ApiResponse(
               200,
-              {accessToken,refreshToken:newRefreshToken},
+              {user,accessToken,refreshToken:refreshToken},
               "access token refreshed"
           )
       )
   } catch (error) {
     throw new ApiError(401,error?.message||"invalid refresh token")
-  }
+  } 
+})
 
+const updateLangPref=asyncHandler(async(req,res)=>{ 
+  const decodedToken=jwt.verify(
+    req.cookies.accessToken,
+    process.env.ACCESS_TOKEN_SECRET
+   )
+  await User.findByIdAndUpdate(
+    decodedToken?._id,
+      {
+          $set:{
+            languagePref:req.body.languagePref
+          }
+      },
+      {
+          new:true
+      }
+  )
+
+
+
+  return res
+  .status(200) 
+  .json(new ApiResponse(200,{},"Updated"))
 
 })
 
-module.exports={registerUser,loginUser,logoutUser,refreshAccessToken}
+module.exports={registerUser,loginUser,logoutUser,refreshAccessToken,updateLangPref}

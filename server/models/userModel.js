@@ -35,7 +35,10 @@ const userSchema = new Schema({
     },
     refreshToken:{
         type:String
-    }
+    },
+    languagePref:{
+        type:String
+    } 
     
     
 }, {

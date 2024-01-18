@@ -1,6 +1,7 @@
 import React from 'react'
 import LeaderBoardComponent from '../components/LeaderBoard/LeaderBoardComponent'
 
+
 const studentsData=[
     {
         name:"rashmi",

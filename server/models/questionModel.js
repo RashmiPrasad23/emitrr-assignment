@@ -1,19 +1,29 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose');
 const questionSchema=new mongoose.Schema({
-    title: {
+    question: {
         required: true,
         type: String
     },
     category: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Language'
+        type: String,
+        required:true
     },
-    incorrectOptions: [{
+    options: [{
         type: String,
         required: true,
         default: null
     }],
     correctAnswer: {
+        type: String,
+        required: true,
+        default: null
+    },
+    difficulty: {
+        type: Number,
+        required: true,
+        default: null
+    },
+    language: {
         type: String,
         required: true,
         default: null

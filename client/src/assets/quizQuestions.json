@@ -1,0 +1,243 @@
+[
+    {
+      "question": "Identify the verb in the sentence:",
+      "options": ["The", "Quick", "Brown", "Fox"],
+      "correctAnswer": "Quick",
+      "difficulty": 3,
+      "category": "verb",
+      "language": "english"
+    },
+    {
+      "question": "What is the adverb in the phrase?",
+      "options": ["Jumps", "Over", "The", "Lazy"],
+      "correctAnswer": "Jumps",
+      "difficulty": 2,
+      "category": "adverb",
+      "language": "english"
+    },
+    {
+      "question": "Select the noun in the following:",
+      "options": ["Runs", "Swiftly", "In", "The"],
+      "correctAnswer": "The",
+      "difficulty": 4,
+      "category": "noun",
+      "language": "english"
+    },
+    {
+      "question": "Which word is a pronoun?",
+      "options": ["Brown", "He", "Jumped", "Over"],
+      "correctAnswer": "He",
+      "difficulty": 1,
+      "category": "pronoun",
+      "language": "english"
+    },
+    {
+      "question": "Find the adjective in the sentence:",
+      "options": ["The", "Quick", "Fox", "Jumps"],
+      "correctAnswer": "Fox",
+      "difficulty": 3,
+      "category": "adjective",
+      "language": "english"
+    },
+    {
+      "question": "What is the adverb in the sentence?",
+      "options": ["The", "Lazy", "Dog", "Barked"],
+      "correctAnswer": "Lazy",
+      "difficulty": 2,
+      "category": "adverb",
+      "language": "english"
+    },
+    {
+      "question": "Select the pronoun in the phrase:",
+      "options": ["Quick", "Brown", "He", "Jumped"],
+      "correctAnswer": "He",
+      "difficulty": 4,
+      "category": "pronoun",
+      "language": "english"
+    },
+    {
+      "question": "Identify the noun in the following:",
+      "options": ["Over", "The", "Lazy", "Dog"],
+      "correctAnswer": "Dog",
+      "difficulty": 1,
+      "category": "noun",
+      "language": "english"
+    },
+    {
+      "question": "What is the verb in the phrase?",
+      "options": ["The", "Brown", "Fox", "Jumps"],
+      "correctAnswer": "Jumps",
+      "difficulty": 3,
+      "category": "verb",
+      "language": "english"
+    },
+    {
+      "question": "Select the adjective in the sentence:",
+      "options": ["The", "Quick", "Dog", "Over"],
+      "correctAnswer": "Quick",
+      "difficulty": 2,
+      "category": "adjective",
+      "language": "english"
+    },
+    {
+      "question": "Find the pronoun in the phrase:",
+      "options": ["Lazy", "He", "Jumps", "Over"],
+      "correctAnswer": "He",
+      "difficulty": 4,
+      "category": "pronoun",
+      "language": "english"
+    },
+    {
+      "question": "Identify the adverb in the sentence:",
+      "options": ["The", "Fox", "Quickly", "Jumps"],
+      "correctAnswer": "Quickly",
+      "difficulty": 1,
+      "category": "adverb",
+      "language": "english"
+    },
+    {
+      "question": "Select the noun in the phrase:",
+      "options": ["Brown", "Dog", "Runs", "Swiftly"],
+      "correctAnswer": "Dog",
+      "difficulty": 3,
+      "category": "noun",
+      "language": "english"
+    },
+    {
+      "question": "What is the verb in the following:",
+      "options": ["Over", "Lazy", "The", "Dog"],
+      "correctAnswer": "Lazy",
+      "difficulty": 2,
+      "category": "verb",
+      "language": "english"
+    },
+    {
+      "question": "Find the adjective in the sentence:",
+      "options": ["The", "Brown", "Jumps", "Swiftly"],
+      "correctAnswer": "Brown",
+      "difficulty": 4,
+      "category": "adjective",
+      "language": "english"
+    },
+    {
+      "question": "Select the adverb in the phrase:",
+      "options": ["The", "Dog", "Quickly", "Runs"],
+      "correctAnswer": "Quickly",
+      "difficulty": 1,
+      "category": "adverb",
+      "language": "english"
+    },
+    {
+      "question": "Identify the pronoun in the sentence:",
+      "options": ["Over", "Lazy", "He", "Jumps"],
+      "correctAnswer": "He",
+      "difficulty": 3,
+      "category": "pronoun",
+      "language": "english"
+    },
+    {
+      "question": "What is the noun in the phrase?",
+      "options": ["The", "Fox", "Brown", "Jumps"],
+      "correctAnswer": "Fox",
+      "difficulty": 2,
+      "category": "noun",
+      "language": "english"
+    },
+    {
+      "question": "Select the verb in the following:",
+      "options": ["Lazy", "The", "Dog", "Runs"],
+      "correctAnswer": "Runs",
+      "difficulty": 4,
+      "category": "verb",
+      "language": "english"
+    },
+    {
+      "question": "Find the adverb in the sentence:",
+      "options": ["The", "Quick", "Jumps", "Over"],
+      "correctAnswer": "Over",
+      "difficulty": 1,
+      "category": "adverb",
+      "language": "english"
+    },
+    {
+      "question": "वाक्य में क्रिया को पहचानें:",
+      "options": ["तेज", "काला", "भूरा", "कुत्ता"],
+      "correctAnswer": "तेज",
+      "difficulty": 3,
+      "category": "क्रिया",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "वाक्य में क्रिया को पहचानें:",
+      "options": ["बढ़ता", "ऊपर", "विशेष", "आलसी"],
+      "correctAnswer": "बढ़ता",
+      "difficulty": 2,
+      "category": "क्रिया",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "निम्नलिखित में से संज्ञा का चयन करें:",
+      "options": ["दौड़ता", "तेज़ी से", "में", "द", "बारिश"],
+      "correctAnswer": "बारिश",
+      "difficulty": 4,
+      "category": "संज्ञा",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "कौन सा शब्द सर्वनाम है?",
+      "options": ["भूरा", "वह", "कूदा", "ऊपर"],
+      "correctAnswer": "वह",
+      "difficulty": 1,
+      "category": "सर्वनाम",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "वाक्य में विशेषण को पहचानें:",
+      "options": ["वह", "तेज़", "कुत्ता", "ऊपर"],
+      "correctAnswer": "तेज़",
+      "difficulty": 3,
+      "category": "विशेषण",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "वाक्य में क्रिया को पहचानें:",
+      "options": ["दौड़ता", "ऊपर", "भारी", "छलांग"],
+      "correctAnswer": "छलांग",
+      "difficulty": 2,
+      "category": "क्रिया",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "वाक्य में सर्वनाम को पहचानें:",
+      "options": ["तेज", "भूरा", "वह", "कुत्ता"],
+      "correctAnswer": "वह",
+      "difficulty": 4,
+      "category": "सर्वनाम",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "निम्नलिखित में से संज्ञा का चयन करें:",
+      "options": ["ऊपर", "दौड़ता", "भारी", "कुत्ता"],
+      "correctAnswer": "कुत्ता",
+      "difficulty": 1,
+      "category": "संज्ञा",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "वाक्य में क्रिया को पहचानें:",
+      "options": ["तेज", "काला", "भूरा", "बड़ा"],
+      "correctAnswer": "बड़ा",
+      "difficulty": 3,
+      "category": "क्रिया",
+      "language": "हिन्दी"
+    },
+    {
+      "question": "वाक्य में विशेषण को पहचानें:",
+      "options": ["बढ़ता", "तेज़", "कुत्ता", "जल"],
+      "correctAnswer": "तेज़",
+      "difficulty": 1,
+      "category": "विशेषण",
+      "language": "हिन्दी"
+    }
+  ]
+  

@@ -1,25 +1,20 @@
-import React from 'react'
-import "../../../src/style.css"
+import React from "react";
+import "../../../src/style.css";
 
 function Footer() {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-light">
+      <nav className="position-fixed bottom-0 bg-white w-100 z-3">
         <div className="container-fluid">
-          {/* <a className="navbar-brand" href="#">Navbar</a> */}
-          <div className="collapse navbar-collapse container" id="navbarSupportedContent">
-            <form className="d-flex">
-              <p>&copy;
-               <a style={{ textDecoration: "none" }}>
-                LearnLangTeam,2024
-               </a>
-              </p>
-            </form>
-          </div>
+          <p>
+            <a style={{ textDecoration: "none" }}>
+              &copy; LearnLangTeam | 2024
+            </a>
+          </p>
         </div>
       </nav>
     </>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

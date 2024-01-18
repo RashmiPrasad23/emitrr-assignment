@@ -19,8 +19,8 @@ app.use(express.json({limit:"16kb"}));
 app.use(express.urlencoded({ extended: true,limit:"16kb" }));
 
 //set n get cookie from browser
-app.use(cookieParser());
-
+app.use(cookieParser()); 
+ 
 
 
 // use assets(files like pdf,img store in server)
