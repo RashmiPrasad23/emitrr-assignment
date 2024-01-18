@@ -1,0 +1,26 @@
+.roboto-family {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    font-size: 2.8rem;
+}
+
+
+h1 {
+    color: #383632;
+    letter-spacing: 1px;
+    line-height: 1.3;
+}
+
+h3 {
+    color: #383632;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.hero-para-text {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #a4a4a7;
+    line-height: 1.7;
+}

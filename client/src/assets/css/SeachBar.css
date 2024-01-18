@@ -1,0 +1,27 @@
+input {
+    /* background-color: transparent; */
+    border: none;
+    height: 100%;
+    font-size: 1rem;
+    width: 70%;
+    color: #E2E2E2;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
+    /* box-shadow: 0px 0px 8px #ddd; */
+
+}
+input:focus {
+    outline: none;
+}
+.searchbar-icon {
+
+    background-color: #F7C744;
+    border-top-right-radius: 22%;
+    border-bottom-right-radius: 22%;
+
+}
+#search-icon {
+    color: black;
+
+    /* size: 100px; */
+}

@@ -13,4 +13,4 @@ const languageSchema=new mongoose.Schema({
 
 },{timestamps:true})
 
-export const Language=mongoose.model('Language',languageSchema)
+module.exports=mongoose.model('Language',languageSchema)

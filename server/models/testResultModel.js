@@ -14,4 +14,4 @@ const testResultSchema=new mongoose.Schema({
 },
 {timestamps:true})
 
-export const TestResultSchema=mongoose.model("TestResultSchema",testResultSchema);
+module.exports=mongoose.model("TestResultSchema",testResultSchema);
