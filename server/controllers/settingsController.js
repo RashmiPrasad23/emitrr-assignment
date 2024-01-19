@@ -5,6 +5,8 @@ const ApiResponse=require("../utils/ApiResponse.js")
 const jwt=require('jsonwebtoken') 
 const bcrypt=require('bcrypt')
 
+//getting user details
+
 const getUserDetails=asyncHandler(async(req,res)=>{ 
    const decodedToken=jwt.verify(
     req.cookies.accessToken,
@@ -26,6 +28,7 @@ const getUserDetails=asyncHandler(async(req,res)=>{
       )
     )
 })
+
 
 const putUserDetails=asyncHandler(async(req,res)=>{ 
   // only auth person can change the value

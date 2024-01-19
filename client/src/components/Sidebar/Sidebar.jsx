@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import logo from "../../assets/svg/react.svg";
+import logo from "../../assets/img/emittr_logo.jpg";
+import { GlobalContext } from "../../context/GlobalContext";
+import apiClient from "../../apiClient/apiClient";
+import { toast } from "react-toastify";
 
+// sidebar for dashboard
+
+//styled components for styling
 const SideBar = styled.div`
   overflow: auto;
   max-height: 100%;
@@ -29,7 +35,7 @@ const SidebarWrapper = styled.div`
   width: 260px;
   z-index: 4;
   padding-bottom: 100px;
-  background-color: #ffd058;
+  background-color: #0b60b0;
 `;
 const Logo = styled.img`
   max-height: 50px;
@@ -59,73 +65,93 @@ const NavLinks = styled.a`
 `;
 const NavLinkText = styled.p`
   margin: auto 10px;
+  color: white;
+  font-weight: 400;
 `;
 
 function Sidebar() {
+  const { authUser, setAuthUser } = useContext(GlobalContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    //
+    let { data } = await apiClient.post(`/users/logout`);
+    if (data.success) {
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken");
+      toast.success(data.message);
+      navigate("/");
+      setAuthUser({});
+    }
+  };
   return (
     <SideBar>
       <SidebarWrapper>
         <div className="logo ">
           <a href="/">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" width={180} />
           </a>
         </div>
         <ul className="nav d-block mt-5">
           <li className="nav-item mb-4">
             <NavLink className="nav-link" to="/profile">
               <FontAwesomeIcon
-                icon="fa-solid fa-pencil"
+                icon="fa-solid fa-address-card"
                 fixedWidth
                 pull="left"
-                className="my-auto fs-4"
+                className="my-auto fs-4 text-white"
               />
               <NavLinkText>PROFILE</NavLinkText>
-            </NavLink>
-          </li>
-          <li className="nav-item mb-4">
-            <NavLink className="nav-link" to="/start">
-              <FontAwesomeIcon
-                icon="fa-solid fa-pencil"
-                fixedWidth
-                pull="left"
-                className="my-auto fs-4"
-              />
-              <NavLinkText>START TEST</NavLinkText>
-            </NavLink>
-          </li>
-          <li className="nav-item mb-4">
-            <NavLink className="nav-link" to="">
-              <FontAwesomeIcon
-                icon="fa-solid fa-pencil"
-                fixedWidth
-                pull="left"
-                className="my-auto fs-4"
-              />
-              <NavLinkText>VIEW RESULTS</NavLinkText>
-            </NavLink>
-          </li>
-          <li className="nav-item mb-4">
-            <NavLink className="nav-link" to="">
-              <FontAwesomeIcon
-                icon="fa-solid fa-pencil"
-                fixedWidth
-                pull="left"
-                className="my-auto fs-4"
-              />
-              <NavLinkText>SUPER ADMIN</NavLinkText>
             </NavLink>
           </li>
           {/* settings page */}
           <li className="nav-item mb-4">
             <NavLink className="nav-link" to="/settings">
               <FontAwesomeIcon
-                icon="fa-solid fa-pencil"
+                icon="fa-solid fa-gear"
                 fixedWidth
                 pull="left"
-                className="my-auto fs-4"
+                className="my-auto fs-4 text-white"
               />
               <NavLinkText>SETTINGS</NavLinkText>
             </NavLink>
+          </li>
+          <li className="nav-item mb-4">
+            <NavLink className="nav-link" to="/leaderboard">
+              <FontAwesomeIcon
+                icon="fa-solid fa-ranking-star"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4 text-white"
+              />
+              <NavLinkText>LEADERBOARD</NavLinkText>
+            </NavLink>
+          </li>
+          <li className="nav-item mb-4">
+            <NavLink className="nav-link" to="/start">
+              <FontAwesomeIcon
+                icon="fa-solid fa-code"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4 text-white"
+              />
+              <NavLinkText>START TEST</NavLinkText>
+            </NavLink>
+          </li>
+          <li className="nav-item mb-4 position-absolute bottom-0">
+            <a
+              className="nav-link d-flex"
+              onClick={handleLogout}
+              style={{ cursor: "pointer" }}
+            >
+              <FontAwesomeIcon
+                icon="fa-solid fa-right-from-bracket"
+                fixedWidth
+                pull="left"
+                className="my-auto fs-4 text-white"
+              />
+              <NavLinkText>LOGOUT</NavLinkText>
+            </a>
           </li>
         </ul>
       </SidebarWrapper>

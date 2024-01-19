@@ -1,3 +1,5 @@
+//user model
+
 const mongoose = require('mongoose');
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcrypt')
@@ -37,8 +39,16 @@ const userSchema = new Schema({
         type:String
     },
     languagePref:{
-        type:String
-    } 
+        type:String,
+        default:null
+    },
+    pointsData:[
+    {
+        language: String,
+        totalPoints: Number,
+        pointsObtained: Number,
+    }
+    ]
     
     
 }, {

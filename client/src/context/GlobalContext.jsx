@@ -5,11 +5,13 @@ const userDetail = {
   email: "",
   username: "",
   role: null,
-  languagePref: "English",
+  languagePref: "",
 };
 
 export const GlobalContext = createContext(null);
 
+// global context for storing data so that data could directly
+// be used from here to avoid prop drilling
 const ContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(userDetail);
 

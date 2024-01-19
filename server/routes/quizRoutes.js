@@ -1,10 +1,21 @@
+//routes for quiz conduction
+
 const express = require("express")
 const verifyJWT=require("../middlewares/authMiddleware.js")
-const{getAllQuestions} =require("../controllers/quizController.js")
-
-const userRouter=express.Router()
-
-userRouter.route("/getAllQuestion").get(getAllQuestions)  
+const{getAllQuestions,getAllSeries,getSeriesQuestions, postQuizSubmission, getLeaderboard} =require("../controllers/quizController.js")
 
 
-module.exports=userRouter
+const quizRouter=express.Router()
+
+quizRouter.route("/getAllQuestion").get(getAllQuestions) 
+
+quizRouter.route("/getAllSeries").get(getAllSeries)
+
+quizRouter.route("/getSeriesQuestions").get(getSeriesQuestions)
+
+quizRouter.route("/postQuizSubmission").post(postQuizSubmission)
+
+quizRouter.route("/getLeaderboard").get(getLeaderboard)
+
+
+module.exports=quizRouter

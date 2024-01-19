@@ -4,6 +4,7 @@ import "../assets/css/Register.css";
 import { useRef } from "react";
 import axios from "axios";
 import { GlobalContext } from "../context/GlobalContext";
+import logo from "../assets/img/emittr_logo.jpg";
 
 const Login = (props) => {
   const [emailError, setEmailError] = useState("");
@@ -56,6 +57,9 @@ const Login = (props) => {
   return (
     <div className={"mainContainer"}>
       <div className={"titleContainer"}>
+        <Link to="/" className="mb-2">
+          <img src={logo} height="30" alt="logo" />
+        </Link>
         <div>Login</div>
       </div>
       <br />
@@ -84,9 +88,19 @@ const Login = (props) => {
           <label className="errorLabel">{passwordError}</label>
         </div>
         <br />
-        <div className={"inputContainer"}>
-          <button onClick={onButtonClick} type="button">
+        {/* button */}
+        <div className="d-flex g-3 justify-content-between">
+          <button type="button" class="btn btn-primary" onClick={onButtonClick}>
             Login
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            Signup
           </button>
         </div>
       </form>

@@ -1,3 +1,5 @@
+// language model 
+
 const mongoose = require('mongoose');
 const languageSchema=new mongoose.Schema({
     title:{

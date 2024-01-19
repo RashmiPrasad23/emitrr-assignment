@@ -1,8 +1,12 @@
 const mongoose = require('mongoose');
 
+// setting up db connection
 const connectDB=async()=>{
     try{
+      // mongodb url for connection from env file
       const connectionInstance=await mongoose.connect(`${process.env.MONGODB_URL}`)
+
+      //logging successful and error message as per the circumstances
       console.log(`MongoDB connected!! DB HOST:${connectionInstance.connection.host}`);
     }catch(error){
         console.log("mongodb connection error");

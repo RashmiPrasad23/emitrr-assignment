@@ -1,29 +1,44 @@
-import React from 'react'
-import LeaderBoardComponent from '../components/LeaderBoard/LeaderBoardComponent'
+import React, { useState, useEffect } from "react";
+import LeaderBoardComponent from "../components/LeaderBoard/LeaderBoardComponent";
+import Base from "../layout/Base";
+// import scoresData from "../assets/score.json"; //initially using demo data
+import apiClient from "../apiClient/apiClient";
+import { toast } from "react-toastify";
+import ClipLoader from "react-spinners/ClipLoader";
+import { override } from "../App";
 
-
-const studentsData=[
-    {
-        name:"rashmi",
-        marks:"12",
-        subject:"c++"
-    },
-    {
-        name:"naman",
-        marks:"10",
-        subject:"c++"
-    },
-    {
-        name:"sucheta",
-        marks:"21",
-        subject:"java"
-    }
-
-]
 function LeaderBoard() {
+  const [scoresData, setScoresData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    async function fetchData() {
+      let { data } = await apiClient.get(`/quiz/getLeaderboard`);
+      if (data.success) {
+        setScoresData(data.data);
+        // toast.success(data.message);
+      }
+      setLoading(false);
+    }
+    fetchData();
+  }, []);
+
   return (
-   <LeaderBoardComponent students={studentsData} />
-  )
+    <Base title="LeaderBoard | Learn Language Game">
+      {loading ? (
+        <div className="vw-100 vh-100">
+          <ClipLoader
+            color={"#ffffff"}
+            loading={loading}
+            cssOverride={override}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
+        </div>
+      ) : (
+        scoresData && <LeaderBoardComponent score={scoresData} />
+      )}
+    </Base>
+  );
 }
 
-export default LeaderBoard
+export default LeaderBoard;

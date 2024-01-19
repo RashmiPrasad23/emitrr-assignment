@@ -1,3 +1,5 @@
+//constructor for better API response 
+
 class ApiResponse{
     constructor(statusCode,data = null,message="Success"){
         this.statusCode=statusCode

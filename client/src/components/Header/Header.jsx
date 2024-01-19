@@ -1,17 +1,18 @@
-import React from 'react'
+import React from "react";
 import { Link } from "react-router-dom";
 import CustomBtn from "../Button/CustomBtn.jsx";
-import logo from "../../assets/svg/react.svg"
+import logo from "../../assets/img/emittr_logo.jpg";
 
 function Header() {
   return (
+    // navbar secion for the home page
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-white mx-auto"
+      className="navbar navbar-expand-lg navbar-light bg-white mx-auto "
       style={{ padding: "3% 6%" }}
     >
-      <div className="container-fluid ">
+      <div className="container-fluid d-flex justify-content-between ">
         <Link to="/" className="">
-          <img src={logo} height="60" alt="logo" />
+          <img src={logo} height="40" alt="logo" />
         </Link>
         <button
           className="navbar-toggler"
@@ -24,7 +25,10 @@ function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse " id="navbarSupportedContent">
+        <div
+          className="collapse navbar-collapse justify-content-end "
+          id="navbarSupportedContent"
+        >
           <div className="d-flex">
             <CustomBtn value="Signup" to="/signup" />
           </div>
@@ -34,7 +38,7 @@ function Header() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
 
-export default Header
+export default Header;

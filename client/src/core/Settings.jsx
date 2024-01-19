@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 import Base from "../layout/Base";
 import apiClient from "../apiClient/apiClient";
 import { toast } from "react-toastify";
 import { GlobalContext } from "../context/GlobalContext";
 
 const Settings = () => {
-  const { authUser } = useContext(GlobalContext);
+  const { authUser, setAuthUser } = useContext(GlobalContext);
   const usernameRef = useRef("");
   const nameRef = useRef("");
   const emailRef = useRef("");
@@ -18,27 +18,36 @@ const Settings = () => {
   }, [authUser]);
 
   const handleUpdateUserDetails = async () => {
-    //
+    //update details that are changed
+    try {
+      let rawData = {
+        fullName: nameRef.current.value,
+        email: emailRef.current.value,
+        username: usernameRef.current.value,
+      };
+      if (passwordRef.current.value) {
+        rawData.password = passwordRef.current.value;
+      }
 
-    let rawData = {
-      fullName: nameRef.current.value,
-      email: emailRef.current.value,
-      username: usernameRef.current.value,
-    };
-    if (passwordRef.current.value) {
-      rawData.password = passwordRef.current.value;
-    }
-
-    let { data } = await apiClient.patch(`/settings/putUserDetails`, rawData);
-    if (data.success) {
-      toast.success(data.message);
-      passwordRef.current.value = "";
+      let { data } = await apiClient.patch(`/settings/putUserDetails`, rawData);
+      if (data.success) {
+        setAuthUser({
+          ...authUser,
+          fullName: nameRef.current.value,
+          email: emailRef.current.value,
+          username: usernameRef.current.value,
+        });
+        toast.success(data.message);
+        passwordRef.current.value = "";
+      }
+    } catch (error) {
+      toast.error("Error loggin again");
     }
   };
 
   return (
     <Base title="Settings">
-      <h1>View/Update Settings</h1>
+      <h2 className="p-3 shadow-sm">View/Update Settings</h2>
       {/* name */}
       <div className="mb-3">
         <label htmlFor="Input1" className="form-label">

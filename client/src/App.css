@@ -1,4 +1,8 @@
- 
+:root {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.0rem;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

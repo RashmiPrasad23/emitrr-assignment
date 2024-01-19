@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+// created custom buttom using style components
 const CustomBtn = (props) => {
   const navigate = useNavigate();
   const defaultValue = {

@@ -3,11 +3,16 @@ const asyncHandler=require("../utils/asyncHandler.js")
 const ApiError=require("../utils/ApiError.js")
 const ApiResponse=require("../utils/ApiResponse.js")
 const jwt=require('jsonwebtoken')
+const  QuizResult = require("../models/testResultModel.js")
 
 
+//handler for generating access and refresh tokens whenver needed
 const generateAccessAndRefreshTokens=async(userId)=>{
     try{
+       // Find the user in the database using the provided user ID
        const user=await User.findById(userId)
+
+       // Generate an access token using the user's information
        const accessToken=user.generateAccessToken()
        const refreshToken=user.generateRefreshToken()
 
@@ -165,50 +170,66 @@ const logoutUser=asyncHandler(async(req,res)=>{
 
 })
 
-const refreshAccessToken=asyncHandler(async(req,res)=>{
-   const incomingRefreshToken= req.cookies.refreshToken||req.body.refreshToken
- 
-   if(!incomingRefreshToken){
-    throw new ApiError(401,"unauthorised request")
-   }
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  // Extract refresh token from cookies or request body
+  const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+
+  // Check if refresh token is missing
+  if (!incomingRefreshToken) {
+    throw new ApiError(401, "Unauthorized request");
+  }
 
   try {
-     const decodedToken=jwt.verify(
+    // Verify the incoming refresh token using the secret
+    const decodedToken = jwt.verify(
       incomingRefreshToken,
       process.env.REFRESH_TOKEN_SECRET
-     )
-     const user=await User.findById(decodedToken?._id).select("-password")
- 
-     if(!incomingRefreshToken){
-      throw new ApiError(401,"invalid refresh token")
-     }
-  
-     if(incomingRefreshToken !== user?.refreshToken){
-      throw new ApiError(401,"refresh token is expiredor use")
-     }
-  
-      const options={
-          httpOnly:true,
-          secure:true
-      }
-  
-      const {accessToken,refreshToken}=await generateAccessAndRefreshTokens(user._id)
-    
-      return res
+    );
+
+    // Find the user associated with the decoded token and exclude the password
+    const user = await User.findById(decodedToken?._id).select("-password");
+
+    // Check if user or refresh token is missing
+    if (!user || !incomingRefreshToken) {
+      throw new ApiError(401, "Invalid refresh token");
+    }
+
+    // Check if the incoming refresh token matches the stored refresh token for the user
+    if (incomingRefreshToken !== user?.refreshToken) {
+      throw new ApiError(401, "Refresh token is expired or invalid");
+    }
+
+    // Set options for cookies (e.g., httpOnly, secure)
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
+
+    // Generate new access and refresh tokens
+    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id);
+
+    // Return success response with updated tokens in cookies and JSON payload
+    return res
       .status(200)
-      .cookie("accessToken",accessToken,options)
-      .cookie("refreshToken",refreshToken,options)
+      .cookie("accessToken", accessToken, options)
+      .cookie("refreshToken", refreshToken, options)
       .json(
-          new ApiResponse(
-              200,
-              {user,accessToken,refreshToken:refreshToken},
-              "access token refreshed"
-          )
-      )
+        new ApiResponse(
+          200,
+          { user, accessToken, refreshToken: refreshToken },
+          "Access token refreshed"
+        )
+      );
   } catch (error) {
-    throw new ApiError(401,error?.message||"invalid refresh token")
-  } 
-})
+    // Handle token verification errors
+    throw new ApiError(401, error?.message || "Invalid refresh token");
+  }
+});
+
+
+
+
+//language preference selection
 
 const updateLangPref=asyncHandler(async(req,res)=>{ 
   const decodedToken=jwt.verify(
@@ -225,14 +246,122 @@ const updateLangPref=asyncHandler(async(req,res)=>{
       {
           new:true
       }
-  )
-
-
-
+  ) 
   return res
   .status(200) 
   .json(new ApiResponse(200,{},"Updated"))
 
 })
 
-module.exports={registerUser,loginUser,logoutUser,refreshAccessToken,updateLangPref}
+//resetting the progress when the user wants
+const patchResetProgress=asyncHandler(async(req,res)=>{ 
+  try{
+    const decodedToken=jwt.verify(
+      req.cookies.accessToken,
+      process.env.ACCESS_TOKEN_SECRET
+     )
+     const user=await User.findById(decodedToken?._id)
+     const result = await User.findOneAndUpdate(
+      {
+        _id: decodedToken?._id,
+        'pointsData.language': user.languagePref
+      },
+      {
+        $set: {
+          'pointsData.$.totalPoints': 0,
+          'pointsData.$.pointsObtained': 0
+        }
+      }, 
+    );
+   
+    return res
+    .status(200) 
+    .json(
+        new ApiResponse(
+            // status code
+            200,
+            // data
+            null,
+            // message
+            "Reset successfully"
+        )
+      )
+  }catch(e){
+    return res
+    .status(500) 
+    .json(
+        new ApiResponse(
+            // status code
+            500,
+            // data
+            null,
+            // message
+            "Error Occoured! Make sure you are logged in."
+        )
+      )
+  }
+})
+
+
+const getSeriesChart=asyncHandler(async(req,res)=>{ 
+  try{
+    const decodedToken=jwt.verify(
+      req.cookies.accessToken,
+      process.env.ACCESS_TOKEN_SECRET
+     ) 
+  
+    // Step 1: Fetch all documents with non-null 'category' and 'totalPoints'
+    const user = await User.findById(decodedToken?._id)
+    // Step 1: Fetch all documents with non-null 'language' and 'pointsObtained'
+    const documents = user.pointsData.filter((point) => point.language && point.pointsObtained !== null);
+// console.log("doc", documents)
+    // Step 2: Process the documents to get unique languages and sum pointsObtained
+    const languageMap = new Map();
+    documents.forEach((doc) => {
+      const { language, pointsObtained } = doc;
+      if (languageMap.has(language)) {
+        languageMap.set(language, languageMap.get(language) + pointsObtained);
+      } else {
+        languageMap.set(language, pointsObtained);
+      }
+    });
+    // Step 3: Create the result object
+    const labels = Array.from(languageMap.keys());
+    const counts = Array.from(languageMap.values());
+
+    const result = {
+      labels: labels,
+      data: counts
+    };
+
+    // console.log(result);
+   
+    return res
+    .status(200) 
+    .json(
+        new ApiResponse(
+            // status code
+            200,
+            // data
+            result,
+            // message
+            "Reset successfully"
+        )
+      )
+    }catch(e){
+      return res
+      .status(500) 
+      .json(
+          new ApiResponse(
+              // status code
+              500,
+              // data
+              null,
+              // message
+              "Error Occoured! Make sure you are logged in."
+          )
+        )
+    }
+})
+
+module.exports={registerUser,loginUser,logoutUser,refreshAccessToken,updateLangPref,patchResetProgress,getSeriesChart}

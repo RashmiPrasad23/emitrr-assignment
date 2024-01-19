@@ -1,9 +1,10 @@
-import React from 'react'
-import defaultImage from "../../assets/img/default-avatar.png"
+import React from "react";
+import defaultImage from "../../assets/img/default-avatar.png";
 
 function Appbar() {
   return (
     <div>
+      {/* navbar for the dashboard part */}
       <nav className="navbar navbar-light bg-light">
         <div className="container-fluid">
           <span></span>
@@ -20,7 +21,7 @@ function Appbar() {
         </div>
       </nav>
     </div>
-  )
+  );
 }
 
-export default Appbar
+export default Appbar;

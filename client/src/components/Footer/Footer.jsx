@@ -4,6 +4,7 @@ import "../../../src/style.css";
 function Footer() {
   return (
     <>
+      {/* footer for the dashboard */}
       <nav className="position-fixed bottom-0 bg-white w-100 z-3">
         <div className="container-fluid">
           <p>
